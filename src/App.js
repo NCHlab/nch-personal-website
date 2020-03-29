@@ -1,54 +1,43 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Header from "./components/views/header.js";
+import Home from "./components/views/home.js";
+import About from "./components/views/about.js";
+import Projects from "./components/views/projects.js";
+import Api from "./components/views/api.js";
+import Background from "./components/utils/background.js";
 
-function Home() {
-  return <h2>Home</h2>;
-}
-
-function About() {
-  return <h2>About</h2>;
-}
-
-function Users() {
-  return <h2>Users</h2>;
-}
+const sections = [
+  { name: "Home", url: "/" },
+  { name: "Projects", url: "projects" },
+  { name: "About / CV", url: "about" },
+  // { title: "Contact", url: "contact" },
+  { name: "API", url: "api" }
+];
 
 function App() {
   return (
     <Router>
       <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-          </ul>
-        </nav>
-
-        {/* A <Switch> looks through its children <Route>s and
+        <Header title="NCHlab" sections={sections} />
+        <Background>
+          {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/users">
-            <Users />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
+          <Switch>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/api">
+              <Api />
+            </Route>
+            <Route path="/projects">
+              <Projects />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </Background>
       </div>
     </Router>
   );
